@@ -1,31 +1,12 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * const {onCall} = require("firebase-functions/v2/https");
- * const {onDocumentWritten} = require("firebase-functions/v2/firestore");
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
-
 const BankIdClientV6 = require("bankid").BankIdClientV6;
 
-// const {onRequest} = require("firebase-functions/v2/https");
 const logger = require("firebase-functions/logger");
-
-// Create and deploy your first functions
-// https://firebase.google.com/docs/functions/get-started
-
-// exports.helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+const {onCall} = require("firebase-functions/v2/https");
 
 const client = new BankIdClientV6({
   production: false,
   qrEnabled: false,
 });
-
-const {onCall} = require("firebase-functions/v2/https");
 
 exports.auth = onCall(async (request) => {
   const data = request.data;
@@ -53,6 +34,7 @@ exports.sign = onCall(async (request) => {
     orderRef: result.orderRef,
   };
 });
+
 exports.collect = onCall(async (request) => {
   const data = request.data;
   logger.debug("collect request", data);
@@ -60,6 +42,8 @@ exports.collect = onCall(async (request) => {
   if (result.status !== "pending") {
     logger.info("collect result", result);
   }
+  // FYI
+  // Serialize JSON to workaround issue with nested objects in Flutter client
   return JSON.stringify(result);
 });
 

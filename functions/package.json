@@ -14,14 +14,14 @@
   },
   "main": "index.js",
   "dependencies": {
-    "bankid": "^3.2.0",
-    "firebase-admin": "^12.3.0",
-    "firebase-functions": "^5.0.1"
+    "bankid": "^3.2.1",
+    "firebase-admin": "^13.4.0",
+    "firebase-functions": "^6.4.0"
   },
   "devDependencies": {
     "eslint": "^8.15.0",
     "eslint-config-google": "^0.14.0",
-    "firebase-functions-test": "^3.3.0"
+    "firebase-functions-test": "^3.4.1"
   },
   "private": true
 }
